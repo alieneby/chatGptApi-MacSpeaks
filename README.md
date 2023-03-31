@@ -12,15 +12,23 @@ Add your OPEN-API-KEY there!
 # RUN
 Two ways of usage are implemented.
 
-## RUN in terminal
+## RUN in terminal (orignal way to chat)
 
-node script.js
+```console
+> node script.js
+```
 
-## RUN in Browser
+<img src="screenshots/terminal.png">
 
-node server.js
+
+## RUN in Browser (second way to chat)
+
+```console
+> node server.js
+```
 
 Then click on http://localhost:3000/
 
+<img src="screenshots/web.png">
 
 

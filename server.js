@@ -1,5 +1,4 @@
 import express from "express"
-import bodyParser from "body-parser"
 
 import {saveConversationService} from "./server/saveConversationsService.js"
 import { chatService } from "./server/chatService.js"

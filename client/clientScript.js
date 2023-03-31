@@ -26,7 +26,6 @@ const BOT_IMG = "iris.png";
 const PERSON_IMG = "face-smile-regular.svg";
 
 msgerClear.addEventListener("click", event => {
-
   fetch("/saveAndClear")
   .then((response) => response.text())
   .then((data) => {
@@ -34,6 +33,7 @@ msgerClear.addEventListener("click", event => {
   });
 });
 
+msgerInput.addEventListener("keyup",resizeTextarea)
 
 msgerForm.addEventListener("submit", event => {
   event.preventDefault();
@@ -45,7 +45,13 @@ msgerForm.addEventListener("submit", event => {
   msgerInput.value = "";
 
   botResponse(msgText);
+  resizeTextarea();
 });
+
+function resizeTextarea() {
+  msgerInput.style.height = "auto";
+  msgerInput.style.height = msgerInput.scrollHeight + 'px';
+}
 
 function appendMessage(name, img, side, text) {
   //   Simple solution for small apps
