@@ -1,3 +1,15 @@
+# WHATS THAT?
+
+It is chat-GPT chat, that speaks.
+🤖 This chat reads the responses aloud.
+So you can hear the AIs words.
+
+Extra features:
+- Stores the chat in a text file (./conversations/)
+- Configure your start prompt in the prompt-XX.txt
+- Uses OSX say command to speak/read the answer.
+
+
 # INSTALLATION
 
 npm install
