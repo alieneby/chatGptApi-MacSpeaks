@@ -7,7 +7,7 @@ let chatGptEngine = new PluginInterface();
 Object.assign(chatGptEngine, {
     isAIEngine: true,
     isResponseModifier: false,
-    name: 'CHATGPT_PLUGIN',
+    name: 'ENGINE_CHATGPT_PLUGIN',
 
     openAi: null,
 

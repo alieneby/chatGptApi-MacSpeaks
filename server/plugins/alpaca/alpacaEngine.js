@@ -8,7 +8,7 @@ let alpacaEngine = new PluginInterface();
 Object.assign(alpacaEngine, {
     isAIEngine: true,
     isResponseModifier: true,
-    name: 'ALPACA_PLUGIN',
+    name: 'ENGINE_ALPACA_PLUGIN',
 
     dalai: null,
     stopWords: ['Martin:', 'martin:', 'MARTIN:', '\n\n<end>'],
@@ -33,30 +33,30 @@ Object.assign(alpacaEngine, {
         })
     },
 
-    messeagesToText: function (messages) {
+    messagesToText: function (messages) {
         let text = '';
         for (let msg of messages) {
-            if ( text == '') {
+            if ( text === '') {
                 text = msg.content + '\n';
             } else {
-                let person = msg.role == 'user' ? 'Martin' : 'Iris';
+                let person = msg.role == 'user' ? process.env.USER_NAME : process.env.AI_NAME;
                 text += person + ':' + msg.content + '\n';
             }
         }
+        text += process.env.AI_NAME + ': ';
         return text;
     },
 
     msg: async function (param) {
         console.log('alpacaEngine.msg(), ', param)
-        let prompt= this.messeagesToText(param.messages);
+        let prompt= this.messagesToText(param.messages);
         let promptLength = prompt.length;
         let str = '';
         let end = false;
         let aiResponse = '';
 
         this.dalai.request({
-            model: "llama.13B",
-            //model: "llama.7B",
+            model: process.env.ENGINE_ALPACA_MODEL,
             prompt: prompt,
 
           }, (token) => {

@@ -1,7 +1,9 @@
 import googlePlugin from '../plugins/google/google.js'
 import toUppperCaseObj from './toUpperCase/toUpperCase.js'
 import chatGptEngine from '../plugins/chatGpt/chatGpt.js'
+import gptDavinciEngine from '../plugins/gptDavinci/gptDavinci.js'
 import alpacaEngine from '../plugins/alpaca/alpacaEngine.js'
+
 
 
 let registerObj = {
@@ -14,6 +16,7 @@ let registerObj = {
         toUppperCaseObj,
         chatGptEngine,
         alpacaEngine,
+        gptDavinciEngine,
 
     ],
     init: ( chatServiceObj ) => {
