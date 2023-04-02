@@ -2,35 +2,23 @@ import fs from "fs"
 import { config } from "dotenv"
 config()
 import { exec } from "child_process"
-
-import { Configuration, OpenAIApi } from "openai"
-
-const openAi = new OpenAIApi(
-  new Configuration({
-    apiKey: process.env.OPEN_AI_API_KEY,
-  })
-)
+import register from '../server/plugins/register.js'
 
 
 let chatService = {
     messages: [],
-    openAi: null,
+    ai: null,
+    responseModifiers: [],
 
-    init: function () {
+    init: async function () {
         this.messages = []
-
-        this.openAi = new OpenAIApi(
-            new Configuration({
-              apiKey: process.env.OPEN_AI_API_KEY,
-            })
-        )
-
         let prompt = fs.readFileSync(process.env.PROMPT_FILE, "utf8")
         prompt = prompt
-            .replace('USER_NAME', process.env.USER_NAME)
-            .replace('AI_NAME', process.env.AI_NAME)
+            .replaceAll('USER_NAME', process.env.USER_NAME)
+            .replaceAll('AI_NAME', process.env.AI_NAME)
 
         this.messages.push({ role: "user", content: prompt })
+        register.init();
     },
 
     msg: async function (userTxt) {
@@ -40,14 +28,18 @@ let chatService = {
 
         this.messages.push( { role: "user", content: userTxt } )
 
-        const response = await openAi.createChatCompletion({
-            model: "gpt-3.5-turbo",
-            messages: this.messages,
+
+        let aiTxt = await this.ai.msg({
+            messages: this.messages
         })
 
-        let aiTxt = response.data.choices[0].message.content;
+        //let aiTxt = 'I am a chatbot.'
 
         console.log(aiTxt)
+
+        for (let modifier of this.responseModifiers) {
+            aiTxt = await modifier("" + aiTxt)
+        }
 
         this.messages.push( { role: "assistant", content: aiTxt } )
 
@@ -58,6 +50,11 @@ let chatService = {
         speak(aiTxt)
 
         return aiTxt
+    },
+
+    addResponseModifier: function (modifier, pluginName) {
+        console.log("adding modifier " + pluginName)
+        this.responseModifiers.push(modifier)
     }
 
 
