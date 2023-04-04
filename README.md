@@ -8,6 +8,11 @@ Extra features:
 - Stores the chat in a text file (./conversations/)
 - Configure your start prompt in the prompt-XX.txt
 - Uses OSX say command to speak/read the answer.
+- Supports these AIs:
+    * chat GPT
+    * GPT-3 davinci-002 or davinci-003 (178 B. Parameters)
+    * Alpaca (LLAMA by Stanford Univerity) (7 B. Parameters)
+    * Luminous by Aleph-Alpha (400 B. Parameters!)
 
 
 # INSTALLATION

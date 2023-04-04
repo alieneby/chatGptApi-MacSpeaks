@@ -3,7 +3,7 @@ import toUppperCaseObj from './toUpperCase/toUpperCase.js'
 import chatGptEngine from '../plugins/chatGpt/chatGpt.js'
 import gptDavinciEngine from '../plugins/gptDavinci/gptDavinci.js'
 import alpacaEngine from '../plugins/alpaca/alpacaEngine.js'
-
+import luminousEngine from '../plugins/luminous/luminousEngine.js'
 
 
 let registerObj = {
@@ -17,7 +17,7 @@ let registerObj = {
         chatGptEngine,
         alpacaEngine,
         gptDavinciEngine,
-
+        luminousEngine,
     ],
     init: ( chatServiceObj ) => {
         registerObj.plugins
